@@ -2,11 +2,11 @@ import JSON
 import C7
 
 extension SendingMessage {
-    func toJSONString() -> String {
+    public func toJSONString() -> String {
         return JSONSerializer().serializeToString(json: toJSON())
     }
     
-    func toJSON() -> JSON {
+    public func toJSON() -> JSON {
         var json = [
             "to": JSON.infer(self.toUsers.map { JSON.infer($0) }),
             "toChannel": JSON.infer(Int(self.toChannel)),

@@ -19,6 +19,12 @@ public struct SendingTextMessageContent: SendingMessageContent, TextMessageConte
     public var contentType: Int
     public var toType: Int
     public var text: String
+    
+    public init(contentType: Int, toType: Int, text: String) {
+        self.contentType = contentType
+        self.toType = toType
+        self.text = text
+    }
 }
 
 public struct ReceivedTextMessageContent: ReceivedMessageContent, TextMessageContent {

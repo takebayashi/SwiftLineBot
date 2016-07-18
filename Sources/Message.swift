@@ -10,6 +10,13 @@ public struct SendingMessage: Message {
     public var toChannel: Int64
     public var eventType: Event
     public var content: MessageContent
+    
+    public init(toUsers: [String], toChannel: Int64, eventType: Event, content: MessageContent) {
+        self.toUsers = toUsers
+        self.toChannel = toChannel
+        self.eventType = eventType
+        self.content = content
+    }
 }
 
 public struct ReceivedMessage: Message {
