@@ -31,7 +31,7 @@ struct ReceivedMessageParser {
         guard let toUsers = json["to"]?.arrayValue?.flatMap({$0.stringValue}) else {
             throw ParseError.InvalidJSON("to is missing")
         }
-        guard let type = json["eventType"]?.stringValue, let event = Event(rawValue: type) else {
+        guard let type = json["eventType"]?.stringValue, let event = EventType(rawValue: type) else {
             throw ParseError.InvalidJSON("eventType is missing")
         }
         guard let id = json["id"]?.stringValue else {
@@ -52,8 +52,11 @@ struct ReceivedMessageParser {
 
 class ReceivedMessageContentParser {
     func parse(json: [String: JSON]) throws -> ReceivedMessageContent {
-        guard let contentType = json["contentType"]?.integerValue else {
+        guard let contentTypeValue = json["contentType"]?.integerValue else {
             throw ParseError.InvalidJSON("contentType is missing")
+        }
+        guard let contentType = ContentType(rawValue: contentTypeValue) else {
+            throw ParseError.InvalidJSON("contentType is invalid")
         }
         guard let fromUser = json["from"]?.stringValue else {
             throw ParseError.InvalidJSON("from is missing")
@@ -62,7 +65,7 @@ class ReceivedMessageContentParser {
             throw ParseError.InvalidJSON("to is missing")
         }
         switch contentType {
-        case 1:
+        case .text:
             guard let toType = json["toType"]?.integerValue else {
                 throw ParseError.InvalidJSON("toType is missing")
             }

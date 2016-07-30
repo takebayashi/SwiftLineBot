@@ -1,5 +1,5 @@
 public protocol MessageContent {
-    var contentType: Int { get set }
+    var contentType: ContentType { get set }
     var toType: Int  { get set }
 }
 
@@ -16,11 +16,11 @@ public protocol TextMessageContent: MessageContent {
 }
 
 public struct SendingTextMessageContent: SendingMessageContent, TextMessageContent {
-    public var contentType: Int
+    public var contentType: ContentType
     public var toType: Int
     public var text: String
     
-    public init(contentType: Int, toType: Int, text: String) {
+    public init(contentType: ContentType, toType: Int, text: String) {
         self.contentType = contentType
         self.toType = toType
         self.text = text
@@ -28,7 +28,7 @@ public struct SendingTextMessageContent: SendingMessageContent, TextMessageConte
 }
 
 public struct ReceivedTextMessageContent: ReceivedMessageContent, TextMessageContent {
-    public var contentType: Int
+    public var contentType: ContentType
     public var fromUser: String
     public var toUsers: [String]
     public var toType: Int

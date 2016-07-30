@@ -25,7 +25,7 @@ extension SendingMessage {
 extension SendingTextMessageContent {
     func toJSON() -> JSON {
         return JSON.infer([
-            "contentType": JSON.infer(self.contentType),
+            "contentType": JSON.infer(self.contentType.rawValue),
             "toType": JSON.infer(self.toType),
             "text": JSON.infer(self.text)
         ])
